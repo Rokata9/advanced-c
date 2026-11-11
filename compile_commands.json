@@ -1,6 +1,4 @@
 [
- {"directory": "/Users/rd007905/Code/advanced-c", "file": "hello/greet.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c hello/greet.c"}
-,{"directory": "/Users/rd007905/Code/advanced-c", "file": "hello/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c hello/main.c"}
-,{"directory": "/Users/rd007905/Code/advanced-c", "file": "stats/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c stats/main.c"}
-,{"directory": "/Users/rd007905/Code/advanced-c", "file": "stats/stats.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c stats/stats.c"}
+ {"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/main.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/test_variables.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/test_variables.c"}
 ]

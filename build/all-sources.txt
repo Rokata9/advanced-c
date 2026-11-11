@@ -1,1 +1,1 @@
-hello/greet.c hello/main.c stats/main.c stats/stats.c
+storage-classes/main.c storage-classes/test_variables.c
