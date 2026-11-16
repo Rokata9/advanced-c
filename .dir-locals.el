@@ -1,7 +1,8 @@
 ;;; .dir-locals.el --- one project, many programs (see init.el section 12)
 ;; %p = the program the current file belongs to:
 ;;      a .c file with its own main() is a program by itself, e.g.
-;;      exercises/sum.c -> exercises/sum (keep many in one folder);
+;;      exercises/sum.c -> exercises/sum (keep many in one folder; a main.c
+;;      among them is one of them too: pointers/main.c -> pointers/main);
 ;;      otherwise the nearest folder above the file that has a main.c, e.g. hello.
 ;;      In a file outside every program it is the last program you used.
 ;;   Cmd+Shift+B    build the active program

@@ -4,6 +4,8 @@
 #   that folder (subfolders too) belongs to the program.
 #   Any other .c file with its own main(), e.g. exercises/sum.c: a program
 #   on its own. Keep many of them in one folder (exercises/ here).
+#   A main.c next to other files with a main() is one of those too:
+#   pointers/main.c + pointers/seg_fault.c -> pointers/main, pointers/seg_fault.
 #
 #   Both also get every .c file under common/, if that folder exists
 #   (helpers shared by all programs).
@@ -19,8 +21,7 @@
 # In Emacs, F5 / Cmd+Shift+B / Ctrl+Option+N fill in PROG from the file
 # you are in (see .dir-locals.el).
 #
-# Rules: no spaces in names; don't put a program inside another program
-# (so no extra main() in a folder that has a main.c).
+# Rules: no spaces in names; don't put a folder program inside another one.
 
 BUILD  := build
 CC     := clang
@@ -29,12 +30,18 @@ LDLIBS := -lm
 
 # Every .c file in the project (build/ and .git/ skipped), e.g. hello/greet.c
 ALL_SRCS := $(sort $(patsubst ./%,%,$(shell find . -name '*.c' -not -path './$(BUILD)/*' -not -path './.git/*')))
-# Every folder that has a main.c, e.g. hello
-DIR_PROGS := $(sort $(patsubst %/main.c,%,$(filter %/main.c,$(ALL_SRCS))))
-# Every other .c file that defines main(), without .c, e.g. exercises/sum
+# Every .c file that defines main(), e.g. hello/main.c, exercises/sum.c
 MAIN_LINE  := ^[[:space:]]*(int|void)[[:space:]]+main[[:space:]]*\(
-FILE_PROGS := $(sort $(patsubst %.c,%,$(filter-out main.c %/main.c,\
-                $(shell grep -lE '$(MAIN_LINE)' $(ALL_SRCS) /dev/null))))
+MAIN_FILES := $(shell grep -lE '$(MAIN_LINE)' $(ALL_SRCS) /dev/null)
+# main.c files with another main() in their folder, e.g. pointers/main.c
+SHARED_MAINS := $(foreach m,$(filter %/main.c,$(MAIN_FILES)),\
+                  $(if $(filter-out $(m),$(filter $(dir $(m))%,$(MAIN_FILES))),$(m)))
+# Every folder with a main.c of its own, e.g. hello
+DIR_PROGS := $(sort $(patsubst %/main.c,%,$(filter-out $(SHARED_MAINS),\
+               $(filter %/main.c,$(ALL_SRCS)))))
+# Every other file with a main(), without .c, e.g. exercises/sum, pointers/main
+FILE_PROGS := $(sort $(patsubst %.c,%,$(filter-out $(addsuffix /main.c,$(DIR_PROGS)) main.c,\
+                $(MAIN_FILES))))
 PROGS := $(DIR_PROGS) $(FILE_PROGS)
 
 # clangd (completion, errors, go-to-definition in Emacs) reads
@@ -74,7 +81,7 @@ APP  := $(BUILD)/$(PROG)
 COMMON_SRCS := $(shell find common -name '*.c' 2>/dev/null)
 
 # The program's own files + the shared ones. Sorted so the list is stable.
-ifneq ($(wildcard $(PROG)/main.c),)
+ifneq ($(filter $(PROG),$(DIR_PROGS)),)
 # A folder program: all .c files in the folder.
 SRCS := $(sort $(shell find $(PROG) -name '*.c') $(COMMON_SRCS))
 else ifneq ($(wildcard $(PROG).c),)
