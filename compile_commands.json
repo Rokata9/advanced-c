@@ -1,5 +1,6 @@
 [
- {"directory": "/Users/rd007905/Code/advanced-c", "file": "binary-numbers-bits/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c binary-numbers-bits/main.c"}
+ {"directory": "/Users/rd007905/Code/advanced-c", "file": "arrays/memcpy.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c arrays/memcpy.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "binary-numbers-bits/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c binary-numbers-bits/main.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "complex-number-types/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c complex-number-types/main.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "flexible-array-members/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c flexible-array-members/main.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "pointers/area_peri.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c pointers/area_peri.c"}
