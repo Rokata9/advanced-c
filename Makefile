@@ -1,21 +1,26 @@
-# Many small programs in one project.
+# Many small programs in one project. Two kinds of program:
 #
-#   A program = any folder that has a main.c, e.g. hello/ or stats/.
-#   Every .c file in that folder (subfolders too) belongs to the program,
-#   plus every .c file under common/, if that folder exists (helpers
-#   shared by all programs).
+#   A folder that has a main.c, e.g. hello/ or stats/: every .c file in
+#   that folder (subfolders too) belongs to the program.
+#   Any other .c file with its own main(), e.g. exercises/sum.c: a program
+#   on its own. Keep many of them in one folder (exercises/ here).
+#
+#   Both also get every .c file under common/, if that folder exists
+#   (helpers shared by all programs).
 #   Add, rename or delete files and folders freely: nothing to edit here.
 #
-#   make                     build all programs
-#   make PROG=hello          build one   -> build/hello
-#   make run PROG=hello      build it, then run it
-#   make list                list the programs
-#   make clean               delete build/
+#   make                          build all programs
+#   make PROG=hello               build one   -> build/hello
+#   make PROG=exercises/sum       build one   -> build/exercises/sum
+#   make run PROG=hello           build it, then run it
+#   make list                     list the programs
+#   make clean                    delete build/
 #
 # In Emacs, F5 / Cmd+Shift+B / Ctrl+Option+N fill in PROG from the file
 # you are in (see .dir-locals.el).
 #
-# Rules: no spaces in names; don't put a program inside another program.
+# Rules: no spaces in names; don't put a program inside another program
+# (so no extra main() in a folder that has a main.c).
 
 BUILD  := build
 CC     := clang
@@ -25,7 +30,12 @@ LDLIBS := -lm
 # Every .c file in the project (build/ and .git/ skipped), e.g. hello/greet.c
 ALL_SRCS := $(sort $(patsubst ./%,%,$(shell find . -name '*.c' -not -path './$(BUILD)/*' -not -path './.git/*')))
 # Every folder that has a main.c, e.g. hello
-PROGS := $(sort $(patsubst %/main.c,%,$(filter %/main.c,$(ALL_SRCS))))
+DIR_PROGS := $(sort $(patsubst %/main.c,%,$(filter %/main.c,$(ALL_SRCS))))
+# Every other .c file that defines main(), without .c, e.g. exercises/sum
+MAIN_LINE  := ^[[:space:]]*(int|void)[[:space:]]+main[[:space:]]*\(
+FILE_PROGS := $(sort $(patsubst %.c,%,$(filter-out main.c %/main.c,\
+                $(shell grep -lE '$(MAIN_LINE)' $(ALL_SRCS) /dev/null))))
+PROGS := $(DIR_PROGS) $(FILE_PROGS)
 
 # clangd (completion, errors, go-to-definition in Emacs) reads
 # compile_commands.json: one entry per .c file, with its compile flags.
@@ -44,6 +54,8 @@ compile_commands.json: Makefile $(ALL_LIST)
 ifeq ($(PROG),)
 # ---- No PROG given: all programs -------------------------------------------
 
+.DEFAULT_GOAL := all
+
 all: compile_commands.json
 	@for p in $(PROGS); do $(MAKE) --no-print-directory PROG=$$p || exit 1; done
 
@@ -54,17 +66,23 @@ run:
 	@echo 'Which program? make run PROG=<folder>. Programs:'; printf '  %s\n' $(PROGS); exit 1
 
 else
-# ---- One program: PROG=<folder>, e.g. PROG=hello ----------------------------
+# ---- One program: PROG=hello or PROG=exercises/sum ---------------------------
 
-PROG := $(patsubst %/,%,$(PROG))
+# (PROG=exercises/sum.c works too.)
+override PROG := $(patsubst %.c,%,$(patsubst %/,%,$(PROG)))
 APP  := $(BUILD)/$(PROG)
-
-ifeq ($(wildcard $(PROG)/main.c),)
-$(error $(PROG) is not a program (no main.c). Programs: $(PROGS))
-endif
+COMMON_SRCS := $(shell find common -name '*.c' 2>/dev/null)
 
 # The program's own files + the shared ones. Sorted so the list is stable.
-SRCS := $(sort $(shell find $(PROG) -name '*.c') $(shell find common -name '*.c' 2>/dev/null))
+ifneq ($(wildcard $(PROG)/main.c),)
+# A folder program: all .c files in the folder.
+SRCS := $(sort $(shell find $(PROG) -name '*.c') $(COMMON_SRCS))
+else ifneq ($(wildcard $(PROG).c),)
+# A one-file program.
+SRCS := $(sort $(PROG).c $(COMMON_SRCS))
+else
+$(error $(PROG) is not a program. Programs: $(PROGS))
+endif
 # hello/x.c -> build/obj/hello/x.o
 OBJS := $(SRCS:%.c=$(BUILD)/obj/%.o)
 # Each .o gets a .d file listing the headers it includes, so changing a
