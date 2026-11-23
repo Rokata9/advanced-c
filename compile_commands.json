@@ -14,6 +14,7 @@
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrcat.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrcat.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrcpy.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrcpy.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrlen.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrlen.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xtrlwr.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xtrlwr.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "strings/scanf-fgets.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c strings/scanf-fgets.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "strings/str_to_int.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c strings/str_to_int.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "vla/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c vla/main.c"}
