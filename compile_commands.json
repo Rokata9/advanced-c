@@ -10,6 +10,7 @@
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "pointers/seg_fault.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c pointers/seg_fault.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/main.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/test_variables.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/test_variables.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/str_functions.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/str_functions.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "strings/scanf-fgets.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c strings/scanf-fgets.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "strings/str_to_int.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c strings/str_to_int.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "vla/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c vla/main.c"}

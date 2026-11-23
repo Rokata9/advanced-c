@@ -99,6 +99,14 @@ DEPS := $(OBJS:.o=.d)
 # Relink when a .c file is added or deleted, not only when one changes:
 # build/<name>.sources is rewritten only when the file list changes.
 SRC_LIST := $(APP).sources
+# Clear build leftovers in the way of this program's paths. Happens after
+# a rename, e.g. string_functions/main.c (program build/string_functions,
+# a file) -> string_functions/str_functions.c (program
+# build/string_functions/str_functions, needs a folder there). Only
+# build/ is touched; anything removed is rebuilt when needed.
+$(shell p=$(BUILD); for s in $(subst /, ,$(patsubst %/,%,$(dir $(PROG)))); do \
+          p=$$p/$$s; if [ -e $$p ] && [ ! -d $$p ]; then rm -f $$p $$p.sources; fi; done; \
+        if [ -d $(APP) ]; then rm -rf $(APP); fi)
 $(shell mkdir -p $(dir $(APP)); echo '$(SRCS)' | cmp -s - $(SRC_LIST) || echo '$(SRCS)' > $(SRC_LIST))
 
 .DEFAULT_GOAL := $(APP)
