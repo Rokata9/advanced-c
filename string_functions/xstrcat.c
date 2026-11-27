@@ -1,5 +1,4 @@
 #include <_abort.h>
-#include <_string.h>
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>

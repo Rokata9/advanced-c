@@ -10,8 +10,11 @@
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "pointers/seg_fault.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c pointers/seg_fault.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/main.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/main.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "storage-classes/test_variables.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c storage-classes/test_variables.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/fib_words.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/fib_words.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/str_functions.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/str_functions.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xputs.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xputs.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrcat.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrcat.c"}
+,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrcmp.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrcmp.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrcpy.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrcpy.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xstrlen.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xstrlen.c"}
 ,{"directory": "/Users/rd007905/Code/advanced-c", "file": "string_functions/xtrlwr.c", "command": "clang -std=c17 -g -O0 -Wall -Wextra -Icommon/include -c string_functions/xtrlwr.c"}
